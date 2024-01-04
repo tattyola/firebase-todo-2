@@ -1,25 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+import CreateTaskForm from "./CreateTaskForm";
+import TaskList from "./TaskList";
+import EditTaskForm from "./EditTaskForm";
+import {useState} from "react";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+    const [editTaskId, setEditTaskId] = useState(null)
+
+    const onEdit = (id) => {
+        setEditTaskId(id)
+    }
+    const onEditCancel = (id) => {
+        setEditTaskId(null)
+    }
+
+    return (
+        <div className='container'>
+            Firebase-todo-2
+            <CreateTaskForm/>
+            <TaskList onEdit={onEdit}/>
+            {<EditTaskForm id={editTaskId} onCancel={onEditCancel}/>}
+        </div>
+    );
 }
 
 export default App;
